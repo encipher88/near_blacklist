@@ -4,6 +4,7 @@ My research concerns the debug page. I will tell you how to detect nodes that do
 
 parse-network-info-orig.js
 
+```
 function parseIt(instream) {
 
   const data = JSON.parse(instream);
@@ -78,14 +79,17 @@ function getInput() {
 }
 
 getInput().then(parseIt).catch(console.error);
-
+```
 
 1 clone repo
+```
 git clone https://github.com/encipher88/near_blacklist.git
-
+```
 
 2 use this command
+```
 curl -s -d '{"jsonrpc": "2.0", "method": "network_info", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' 127.0.0.1:3030 | node parse-network-info-orig.js
+```
 
 3 get response
 
@@ -94,8 +98,10 @@ ok correct return
 
 
 4. ok everything works - then run 
+```
 bash script1.sh
-
+```
+```
 #!/bin/bash
 for line in `cat STEP1.txt`
 do
@@ -109,7 +115,7 @@ do
    curl -s -d '{"jsonrpc": "2.0", "method": "network_info", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' "$ip:3030" | node parse-network-info.sh  >> "/root/STEP1.txt"
    fi
 done 
-
+```
 
 Script parsing all ip who produced chunk and block and writing in file step1.txt
 
@@ -120,6 +126,7 @@ Then we have to remove the duplicates
 
 6. Run script2 - This will filter out nodes that are not responding to the request, since when you try to request a curl from a non-responding node, the script freezes
 
+```
 #!/bin/bash
 for line in `cat STEP1.txt`
 do
@@ -133,9 +140,11 @@ do
   echo $ip  >> "/root/STEP2.txt"
    fi
 done 
+```
 
 7. Run Script3  All available nodes are polled and all nodes that do not participate in the network consensus are entered into the black file
 
+```
 #!/bin/bash
 for line in `cat STEP2.txt`
 do
@@ -152,6 +161,7 @@ do
    fi
    fi
 done 
+```
 
 8 Then we have to remove the duplicates and add to config file with right syntax
     Restart the node 
