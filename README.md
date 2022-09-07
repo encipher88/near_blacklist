@@ -1,6 +1,7 @@
 # near_blacklist
 My research concerns the debug page. I will tell you how to detect nodes that do not sign blocks or chunks. Within the framework of the shardnet, I use this information to add nodes to the Blacklist, since they give an extra load on the communication channel and do not provide any information about the network, thereby reducing the number of blocks or chunks I process. As part of staking research, this information can be used to detect a validator that partially skips chunks or blocks - this information can be accumulated and statistics on the quality of the validator's work over time can be displayed. Thus, let the user choose and reward the best validators, as well as save and increase their stake as much as possible
 parse-network-info-orig.js
+
 function parseIt(instream) {
 
   const data = JSON.parse(instream);
@@ -75,6 +76,8 @@ function getInput() {
 }
 
 getInput().then(parseIt).catch(console.error);
+
+
 1 clone repo
 git clone https://github.com/encipher88/near_blacklist.git
 
